@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.dgmltn.helen"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        buildConfigField("String", "PARTICLE_USERNAME", "\"" + PARTICLE_USERNAME +"\"")
+        buildConfigField("String", "PARTICLE_PASSWORD", "\"" + PARTICLE_PASSWORD +"\"")
+        buildConfigField("String", "PARTICLE_HELEN_DEVICE_ID", "\"" + PARTICLE_HELEN_DEVICE_ID +"\"")
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // Wear
+    wearApp project(':wear')
+
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Dependencies
+    compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+
+    compile 'com.jakewharton.timber:timber:2.5.0'
+
+    // https://docs.particle.io/reference/android/#android-cloud-sdk
+    compile 'io.particle:cloudsdk:0.3.4'
+
+}

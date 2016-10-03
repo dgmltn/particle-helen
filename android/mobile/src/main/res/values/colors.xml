@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- https://www.materialpalette.com/blue-grey/brown -->
+    <color name="background">#ffffff</color>
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorPrimaryDark">#455a64</color>
+    <color name="colorAccent">#795548</color>
+    <color name="colorPrimaryLight">#cfd8dc</color>
+    <color name="fabTint">@android:color/white</color>
+</resources>
