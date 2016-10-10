@@ -23,10 +23,6 @@ class ParticleHelenService : IntentService("") {
     }
 
     companion object {
-        internal val PARTICLE_USER = BuildConfig.PARTICLE_USERNAME
-        internal val PARTICLE_PASSWORD = BuildConfig.PARTICLE_PASSWORD
-        internal val DEVICE = BuildConfig.PARTICLE_HELEN_DEVICE_ID
-
         private val ACTION_LEFT_UP = "left_up"
         private val ACTION_LEFT_MY = "left_my"
         private val ACTION_LEFT_DOWN = "left_down"
@@ -71,21 +67,11 @@ class ParticleHelenService : IntentService("") {
             return intent
         }
 
-        val device : ParticleDevice by lazy {
-            val cloud = ParticleCloudSDK.getCloud()
-            Timber.e("got cloud: ${cloud.accessToken}")
-            cloud.logIn(PARTICLE_USER, PARTICLE_PASSWORD)
-            Timber.e("Logged In")
-            val device = cloud.getDevice(DEVICE)
-            Timber.e("Got Device")
-            device
-        }
-
         @WorkerThread
         fun performFunction(f: String): Int {
             Timber.e("command = $f")
             try {
-                val result = device.callFunction(f)
+                val result = App.device.callFunction(f)
                 Timber.e("command = $f. Result = $result")
                 return result
             }

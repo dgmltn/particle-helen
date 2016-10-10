@@ -23,7 +23,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_left_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_chevron_up" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_left_my"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:text="my"
             app:rippleColor="#ffffff"/>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_left_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_right_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_chevron_up" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_right_my"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             android:layout_gravity="center_horizontal"
             android:text="my" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.dgmltn.helen.CustomButton
             android:id="@+id/btn_right_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
