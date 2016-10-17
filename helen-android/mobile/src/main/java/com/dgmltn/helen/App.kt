@@ -21,24 +21,23 @@ class App : Application() {
         ParticleCloudSDK.init(this)
 
         AsyncTask.execute {
-            // Force init of device
-            device.id
+            device.refresh()
         }
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
-    }
-
     companion object {
-        val device : ParticleDevice by lazy {
-            val cloud = ParticleCloudSDK.getCloud()
-            Timber.e("got cloud: ${cloud.accessToken}")
-            cloud.logIn(BuildConfig.PARTICLE_USERNAME, BuildConfig.PARTICLE_PASSWORD)
+        private val cloud by lazy {
+            val it = ParticleCloudSDK.getCloud()
+            Timber.e("got cloud: ${it.accessToken}")
+            it.logIn(BuildConfig.PARTICLE_USERNAME, BuildConfig.PARTICLE_PASSWORD)
             Timber.e("Logged In")
-            val device = cloud.getDevice(BuildConfig.PARTICLE_HELEN_DEVICE_ID)
+            it
+        }
+
+        val device: ParticleDevice by lazy {
+            val it = cloud.getDevice(BuildConfig.PARTICLE_HELEN_DEVICE_ID)
             Timber.e("Got Device")
-            device
+            it
         }
     }
 }
