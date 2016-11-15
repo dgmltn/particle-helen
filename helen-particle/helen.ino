@@ -37,6 +37,9 @@ void setup() {
     Particle.function("right_up", doRightUp);
     Particle.function("right_my", doRightMy);
     Particle.function("right_down", doRightDown);
+    Particle.function("both_up", doBothUp);
+    Particle.function("both_my", doBothMy);
+    Particle.function("both_down", doBothDown);
 
     clearAll();
 }
@@ -83,4 +86,19 @@ int doRightMy(String command) {
 
 int doRightDown(String command) {
     return pressMomentarily(pin_right_down);
+}
+
+int doBothUp(String command) {
+    return pressMomentarily(pin_left_up)
+        + pressMomentarily(pin_right_up);
+}
+
+int doBothMy(String command) {
+    return pressMomentarily(pin_left_my)
+        + pressMomentarily(pin_right_my);
+}
+
+int doBothDown(String command) {
+    return pressMomentarily(pin_left_down)
+        + pressMomentarily(pin_right_down);
 }
