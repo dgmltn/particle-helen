@@ -2,16 +2,17 @@
 // Try this:
 //
 // Left blind up/my/down
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/left_up -d params=x
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/left_my -d params=x
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/left_down -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/left_up -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/left_my -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/left_down -d params=x
 //
 // Right blind up/my/down
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/right_up -d params=x
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/right_my -d params=x
-// curl -H "Authorization: Bearer [token]" https://api.spark.io/v1/devices/[deviceid]/right_down -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/right_up -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/right_my -d params=x
+// curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/right_down -d params=x
 
-int MOMENTARY_BUTTON_PRESS_MS = 500;
+int MOMENTARY_BUTTON_PRESS_MS = 900;
+int MOMENTARY_PAUSE_MS = 100;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pin Assignments
@@ -61,6 +62,7 @@ int pressMomentarily(int pin) {
     digitalWrite(pin, HIGH);
     delay(MOMENTARY_BUTTON_PRESS_MS);
     digitalWrite(pin, LOW);
+    delay(MOMENTARY_PAUSE_MS);
     return 1;
 }
 
