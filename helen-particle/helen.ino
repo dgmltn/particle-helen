@@ -11,18 +11,93 @@
 // curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/right_my -d params=x
 // curl -H "Authorization: Bearer [token]" https://api.particle.io/v1/devices/[deviceid]/right_down -d params=x
 
+#include "MQTT.h"
+
 int MOMENTARY_BUTTON_PRESS_MS = 900;
 int MOMENTARY_PAUSE_MS = 100;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+//----------------
 // Pin Assignments
-////////////////////////////////////////////////////////////////////////////////////////////////////
+//----------------
 int pin_left_up = D0;
 int pin_left_my = D1;
 int pin_left_down = D2;
 int pin_right_up = D3;
 int pin_right_my = D4;
 int pin_right_down = D5;
+
+//----------------
+// MQTT
+//----------------
+
+char myIpString[24];
+byte server[] = { 10, 5, 23, 34 };
+
+void mqttCallback(char* topic, byte* payload, unsigned int length) {
+    char p[length + 1];
+    memcpy(p, payload, length);
+    p[length] = NULL;
+    String message(p);
+
+    if (message.equals("left_up")) {
+        doLeftUp("");
+    }
+    else if (message.equals("left_my")) {
+        doLeftMy("");
+    }
+    else if (message.equals("left_down")) {
+        doLeftMy("");
+    }
+    else if (message.equals("right_up")) {
+        doRightUp("");
+    }
+    else if (message.equals("right_my")) {
+        doRightMy("");
+    }
+    else if (message.equals("right_down")) {
+        doRightDown("");
+    }
+    else if (message.equals("both_up")) {
+        doBothUp("");
+    }
+    else if (message.equals("both_my")) {
+        doBothMy("");
+    }
+    else if (message.equals("both_down")) {
+        doBothDown("");
+    }
+}
+
+MQTT mqttClient(server, 1883, mqttCallback);
+int mqtt_status = 0;
+
+bool setupMqtt() {
+    Particle.variable("mqttstatus", mqtt_status);
+
+    // connect to the server
+    if (mqttClient.connect("helen")) {
+        // subscribe
+        mqttClient.subscribe("devices/helen/in");
+        return true;
+    }
+    return false;
+}
+
+void loopMqtt() {
+    mqtt_status = mqttClient.isConnected() ? 1 : 0;
+
+    if (!mqttClient.loop()) {
+        // Not connected, try to reconnect
+        if (!setupMqtt()) {
+            // Reconnect failed, wait a few seconds
+            delay(5000);
+        }
+    }
+}
+
+//-------------------
+// MAIN PROGRAM
+//-------------------
 
 void setup() {
     pinMode(pin_left_up, OUTPUT);
@@ -43,9 +118,12 @@ void setup() {
     Particle.function("both_down", doBothDown);
 
     clearAll();
+
+    setupMqtt();
 }
 
 void loop() {
+    loopMqtt();
 }
 
 void clearAll() {
