@@ -46,7 +46,7 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
         doLeftMy("");
     }
     else if (message.equals("left_down")) {
-        doLeftMy("");
+        doLeftDown("");
     }
     else if (message.equals("right_up")) {
         doRightUp("");
