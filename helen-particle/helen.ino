@@ -99,6 +99,8 @@ void loopMqtt() {
 // MAIN PROGRAM
 //-------------------
 
+uint32_t lastReset = 0;
+
 void setup() {
     pinMode(pin_left_up, OUTPUT);
     pinMode(pin_left_my, OUTPUT);
@@ -119,11 +121,18 @@ void setup() {
 
     clearAll();
 
+    lastReset = millis();
+
     setupMqtt();
 }
 
 void loop() {
     loopMqtt();
+
+    // Reset every 24 hours
+    if (millis() - lastReset > 24 * 60 * 60 * 1000UL) {
+        System.reset();
+    }
 }
 
 void clearAll() {
