@@ -31,7 +31,7 @@ int pin_right_down = D5;
 //----------------
 
 char myIpString[24];
-byte server[] = { 10, 5, 23, 34 };
+byte server[] = { 10, 5, 23, 166 };
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
     char p[length + 1];
@@ -77,7 +77,7 @@ bool setupMqtt() {
     // connect to the server
     if (mqttClient.connect("helen")) {
         // subscribe
-        mqttClient.subscribe("devices/helen/in");
+        mqttClient.subscribe("cda/downstairs/family-room/blinds/device/command");
         return true;
     }
     return false;
