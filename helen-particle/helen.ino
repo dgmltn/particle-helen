@@ -77,7 +77,7 @@ bool setupMqtt() {
     // connect to the server
     if (mqttClient.connect("helen")) {
         // subscribe
-        mqttClient.subscribe("cda/downstairs/family-room/blinds/device/command");
+        mqttClient.subscribe("devices/particle/helen/command");
         return true;
     }
     return false;
