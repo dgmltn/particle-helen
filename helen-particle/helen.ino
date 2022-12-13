@@ -31,7 +31,7 @@ int pin_right_down = D5;
 //----------------
 
 char myIpString[24];
-byte server[] = { 10, 5, 23, 6 };
+byte server[] = { 10, 5, 22, 2 };
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
     char p[length + 1];
